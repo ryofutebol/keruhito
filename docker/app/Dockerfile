@@ -6,7 +6,8 @@ RUN apt-get update \
 git \
 zip \
 unzip \
-vim
+vim \
+nodejs npm
 
 RUN apt-get update \
     && apt-get install -y libpq-dev \
