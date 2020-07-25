@@ -13,7 +13,7 @@ services:
   app:
     build:
       context: ./docker/app
-    image: php:7.2-fpm
+    image: php:7.3-fpm
     container_name: app
     volumes:
       - .:/var/www/html
