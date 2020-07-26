@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'PostController@index')->name('home');
+Route::group(['middleware' => 'auth:user'], function() {
+    Route::get('/create', 'PostController@create')->name('post.create');
+    Route::post('/add', 'PostController@store')->name('post.store');
+    Route::post('/show{id}', 'PostController@show')->name('post.show');
+    Route::get('/update/{id}', 'PostController@edit')->name('post.edit');
+    Route::get('/update/{id}', 'PostController@update')->name('post.update');
+    Route::get('/delete', 'PostController@destroy')->name('post.destroy');
+});
