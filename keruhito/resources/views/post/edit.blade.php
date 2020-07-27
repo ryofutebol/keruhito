@@ -12,10 +12,10 @@
                     @endforeach
                 </ul>
                 @endif
-                <div class="card-header">{{ __('新規投稿') }}</div>
+                <div class="card-header">{{ __('投稿編集') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post.store') }}">
+                    <form method="POST" action="{{ route('post.index') }}">
                         @csrf
 
                         <div class="form-group row">

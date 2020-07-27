@@ -9,6 +9,7 @@
         <p>{{ $message }}</p>
         @endif
         @foreach ($posts as $post)
+        <a href="{{ route('post.show', ['id' => $post->id]) }}">
         <div class="card">
             <div class="card-body">
                 <p class="card-title">{{ $post->title }}</p>
@@ -18,6 +19,7 @@
                 <p class="card-text">by User</p>
             </div>
         </div>
+        </a>
         @endforeach
     </div>
 @endsection
