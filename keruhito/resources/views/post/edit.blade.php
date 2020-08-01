@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <h4 class="card-header">{{ __('投稿編集') }}</h4>
+            <div class="card shadow">
+                <h4 class="card-header text-secondary">{{ __('投稿編集') }}</h4>
 
                 <!-- フラッシュメッセージ -->
                 @if ($errors->any())
@@ -23,7 +23,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('選手名') }}</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right text-secondary">{{ __('選手名') }}</label>
 
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control @error('email') is-invalid @enderror" name="title" value="{{ $post->title }}" required autofocus>
@@ -31,15 +31,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('紹介文') }}</label>
+                            <label for="content" class="col-md-4 col-form-label text-md-right text-secondary">{{ __('紹介文') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="10文字以上140字以内" required>{{ $post->content }}</textarea>
+                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" rows="5" name="content" placeholder="10文字以上140字以内" required>{{ $post->content }}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('画像') }}</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-right text-secondary">{{ __('画像') }}</label>
 
                             <div class="col-md-6">
                                 <input id="image" type="file" class = "form-cntrol @error('image') is-invalid @enderror" name="image">
@@ -48,7 +48,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-outline-success">
                                     {{ __('投稿') }}
                                 </button>
                             </div>
