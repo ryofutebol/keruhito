@@ -15,9 +15,10 @@
                 <div class="card-header">{{ __('新規投稿') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post.store') }}">
+                    <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
                         @csrf
 
+                        <input id="user_id" type="hidden" name="user_id" value="{{ Auth::user()->id }}" required autofocus>
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('選手名') }}</label>
 
@@ -30,7 +31,7 @@
                             <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('紹介文') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="140字以内" required></textarea>
+                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="140字以内" required>{{ old('content') }}</textarea>
                             </div>
                         </div>
 
@@ -38,7 +39,7 @@
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('画像') }}</label>
 
                             <div class="col-md-6">
-                                <input type="file">
+                                <input id="image" type="file" class = "form-cntrol @error('image') is-invalid @enderror" name="image">
                             </div>
                         </div>
 

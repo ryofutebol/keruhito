@@ -19,8 +19,8 @@ Route::get('/show/{id}', 'PostController@show')->name('post.show');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/create', 'PostController@create')->name('post.create');
     Route::post('/create', 'PostController@store')->name('post.store');
-    Route::get('/update/{id}', 'PostController@edit')->name('post.edit');
     Route::post('/update/{id}', 'PostController@update')->name('post.update');
-    Route::get('/delete', 'PostController@destroy')->name('post.destroy');
+    Route::get('/update/{id}', 'PostController@edit')->name('post.edit');
+    Route::get('/delete/{id}', 'PostController@destroy')->name('post.destroy');
 });
 Auth::routes();

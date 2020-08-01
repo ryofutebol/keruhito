@@ -16,7 +16,7 @@ services:
     image: php:7.3-fpm
     container_name: app
     volumes:
-      - .:/var/www/html
+      - .:/var/www/html:delegated
     depends_on:
       - mysql
   mysql:

@@ -13,10 +13,8 @@
         <div class="card">
             <div class="card-body">
                 <p class="card-title">{{ $post->title }}</p>
-            </div>
-            <img src="/images/pathToYourImage.png" alt="Card image">
-            <div class="card-body">
-                <p class="card-text">by User</p>
+                <p class="card-text">{{ $post->content }}</p>
+                <p class="card-subtitle">by {{ $post->user->name }}</p>
             </div>
         </div>
         </a>

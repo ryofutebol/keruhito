@@ -18,9 +18,9 @@
                     <p class="card-title">{{ $post->title }}</p>
                     <p class="card-text">{{ $post->content }}</p>
                 </div>
-                <img src="/images/pathToYourImage.png" alt="Card image">
+                <img src="{{ asset('storage/images/' . $post->image) }}" alt="Card image">
                 <div class="card-body">
-                    <p class="card-subtitle">by User</p>
+                    <p class="card-subtitle">by {{ $post->user->name }}</p>
                 </div>
                 <div>
                     <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-primary">編集</a>

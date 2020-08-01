@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -37,7 +39,11 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        Post::create($request->all());
+        $file_name = mt_rand() . '.jpg';
+        $post = $request->all();
+        $post['image'] = $file_name;
+        $request->file('image')->storeAs('public/images/', $file_name);
+        Post::create($post);
         return redirect()->route('post.index')->with('success', '投稿しました');
     }
 
@@ -75,11 +81,17 @@ class PostController extends Controller
     public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
-		$post->fill(['title' => $request->name]);
-		$post->fill(['content' => $request->description]);
-		$post->fill(['image' => $request->stock]);
+        $file_name = $post->image;
+        if ($request->file('image')) {
+            $file_name = mt_rand() . '.jpg';
+            Storage::delete('public/images/' . $post->image);
+            $request->file('image')->storeAs('public/images/', $file_name);
+        }
+		$post->fill(['title' => $request->title]);
+		$post->fill(['content' => $request->content]);
+		$post->fill(['image' => $file_name]);
         $post->save();
-        return back()->with('success', '編集しました');
+        return redirect()->route('post.show', ['id' => $post->id])->with('success', '編集しました');
     }
 
     /**
