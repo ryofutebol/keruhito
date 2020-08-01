@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostController@index')->name('post.index');
 Route::get('/show/{id}', 'PostController@show')->name('post.show');
+Route::post('/search', 'PostController@search')->name('post.search');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/create', 'PostController@create')->name('post.create');

@@ -5,14 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <h4 class="card-header">{{ __('新規投稿') }}</h4>
+
+                <!-- フラッシュメッセージ -->
                 @if ($errors->any())
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                    <div class="alert alert-danger px-5">
+                        <ul class="mb-0 list-unstyled">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
-                <div class="card-header">{{ __('新規投稿') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
@@ -31,7 +35,7 @@
                             <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('紹介文') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="140字以内" required>{{ old('content') }}</textarea>
+                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="10文字以上140字以内" rows="5" required>{{ old('content') }}</textarea>
                             </div>
                         </div>
 
@@ -39,7 +43,7 @@
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('画像') }}</label>
 
                             <div class="col-md-6">
-                                <input id="image" type="file" class = "form-cntrol @error('image') is-invalid @enderror" name="image">
+                                <input id="image" type="file" class = "form-cntrol @error('image') is-invalid @enderror" name="image" required>
                             </div>
                         </div>
 

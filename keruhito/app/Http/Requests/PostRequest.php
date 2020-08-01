@@ -25,8 +25,8 @@ class PostRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'content' => 'required|max:140',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:1024|dimensions:max_width=300,ratio=1/1',
+            'content' => 'required|min:10|max:140',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:1024',
         ];
     }
 
@@ -35,10 +35,11 @@ class PostRequest extends FormRequest
         return [
             'title.required' => '選手名は必須項目です',
             'content.required' => '紹介文は必須項目です',
-            'max' => '140文字を超えています',
+            'content.min' => '10文字以上を入力してください',
+            'content.max' => '140文字を超えています',
             'image' => '指定されたファイルが画像ではありません',
             'mimes' => '指定された拡張子（PNG/JPG/GIF）ではありません',
-            'max:1024' => '１Ｍを超えています',
+            'image.max' => '１Ｍを超えています',
             'dimensions' => '画像の比率は1：1で横は最大300pxです',
         ];
     }

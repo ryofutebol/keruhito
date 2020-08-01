@@ -5,14 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <h4 class="card-header">{{ __('投稿編集') }}</h4>
+
+                <!-- フラッシュメッセージ -->
                 @if ($errors->any())
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                    <div class="alert alert-danger px-5">
+                        <ul class="mb-0 list-unstyled">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
-                <div class="card-header">{{ __('投稿編集') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('post.update', $post->id ) }}" enctype="multipart/form-data">
@@ -30,7 +34,7 @@
                             <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('紹介文') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="140字以内" required>{{ $post->content }}</textarea>
+                                <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" placeholder="10文字以上140字以内" required>{{ $post->content }}</textarea>
                             </div>
                         </div>
 
