@@ -69,6 +69,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $this->authorize('update', $post);
         return view('post.edit', compact('post'));
     }
 
@@ -83,9 +84,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $file_name = $post->image;
-        if ($post->user_id !== Auth::id()) {
-            return route('post.edit', ['id' => $post->id])->with('success', 'ユーザーを確認してください');
-        }
+        $this->authorize('update', $post);
         if ($request->file('image')) {
             $file_name = mt_rand() . '.jpg';
             Storage::delete('public/images/' . $post->image);
@@ -106,15 +105,17 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::where('id', $id)->delete();
+        $post = Post::findOrFail($id);
+        $this->authorize('delete', $post);
+        $post->delete();
         return redirect()->route('post.index')->with('success', '削除しました');
     }
 
     public function search(Request $request)
     {
         $posts = Post::where('title', 'like', "%{$request->search}%")
-        ->orWhere('content', 'like', "%{$request->search}%")
-        ->paginate(10);
+                    ->orWhere('content', 'like', "%{$request->search}%")
+                    ->paginate(10);
 
         $search_result = '"' . $request->search . '"の検索結果：' . $posts->total() . '件';
         return view('post.index', compact('posts', 'search_result'));
