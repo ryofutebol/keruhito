@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', 'PostController@index')->name('post.index');
 Route::view('/', 'home');
+Route::get('/home', 'PostController@index')->name('post.index');
 Route::get('/show/{id}', 'PostController@show')->name('post.show');
 Route::post('/search', 'PostController@search')->name('post.search');
 

@@ -16,7 +16,7 @@
 
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="pt-2 text-secondary">{{ $post->title }}</h4>
-                    @if(Auth::user()->id == $post->user_id)
+                    @if(Auth::id() == $post->user_id)
                         <div>
                             <a href="{{ route('post.edit', ['id' => $post->id]) }}" class="btn btn-outline-success">編集 <i class="fas fa-edit"></i></a>
                             <a href="{{ route('post.destroy', ['id' => $post->id]) }}" class="btn btn-outline-danger">削除 <i class="fas fa-trash-alt"></i></a>
