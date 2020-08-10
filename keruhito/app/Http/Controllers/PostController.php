@@ -46,7 +46,7 @@ class PostController extends Controller
         if ($request->twitter_flag == true) {
             $twitter = new TwitterOAuth(
                 env('TWITTER_CLIENT_ID'),
-                env('TWITTER_CLIENT_SECRET')
+                env('TWITTER_CLIENT_SECRET'),
                 Auth::user()->access_token,
                 Auth::user()->access_token_secret
             );
