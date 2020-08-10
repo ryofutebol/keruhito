@@ -47,8 +47,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="twitter_flag" class="col-md-4 col-form-label text-md-right text-secondary">{{ __('Twitterにも投稿する') }}</label>
+
+                            @if (Auth::user()->twitter_id)
+                                <div class="col-md-6">
+                                    <input id="twitter_flag" type="checkbox" class = "form-cntrol @error('twitter_flag') is-invalid @enderror" name="twitter_flag">
+                                </div>
+                            @else
+                                <div class="col-md-6 text-black-50 pt-2 px-3">Twitterログインを行ってください。</div>
+                            @endif
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <a href="{{ route('post.index') }}" class="btn btn-success">
+                                    {{ __('戻る') }}
+                                </a>
                                 <button type="submit" class="btn btn-outline-success">
                                     {{ __('投稿') }}
                                 </button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+use Abraham\TwitterOAuth\TwitterOAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -42,6 +43,17 @@ class PostController extends Controller
     {
         $file_name = mt_rand() . '.jpg';
         $post = $request->all();
+        if ($request->twitter_flag == true) {
+            $twitter = new TwitterOAuth(
+                env('TWITTER_CLIENT_ID'),
+                env('TWITTER_CLIENT_SECRET')
+                Auth::user()->access_token,
+                Auth::user()->access_token_secret
+            );
+            $player_name = '【' . $request->title . "】\n";
+            $tweet_content = $player_name . $request->content;
+            $tweet_check = $twitter->post('statuses/update', array('status' => $tweet_content));
+        }
         $post['image'] = $file_name;
         $request->file('image')->storeAs('public/images/', $file_name);
         Post::create($post);
