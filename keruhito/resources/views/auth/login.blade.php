@@ -56,6 +56,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <a href="{{ route('auth.twitterLogin') }}"  class="btn btn-primary">
+                                    Login with Twitter
+                                </a>
                             </div>
                         </div>
                     </form>

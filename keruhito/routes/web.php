@@ -18,6 +18,9 @@ Route::get('/home', 'PostController@index')->name('post.index');
 Route::get('/show/{id}', 'PostController@show')->name('post.show');
 Route::post('/search', 'PostController@search')->name('post.search');
 
+Route::get('login/twitter', 'Auth\LoginController@redirectToProvider')->name('auth.twitterLogin');
+Route::get('login/twitter/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/create', 'PostController@create')->name('post.create');
     Route::post('/create', 'PostController@store')->name('post.store');
