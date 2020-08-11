@@ -75,6 +75,7 @@ class LoginController extends Controller
             'twitter_id' => $twitter_user->id,
         ], [
             'name' => $twitter_user->name,
+            'nickname' => $twitter_user->nickname,
             'access_token' => $twitter_user->token,
             'access_token_secret' => $twitter_user->tokenSecret,
             'avatar' => $file_name,

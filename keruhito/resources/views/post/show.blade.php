@@ -32,16 +32,18 @@
                 <div class="card-body">
                     <p class="card-text text-secondary">{{ $post->content }}</p>
                     @if ($post->twitter_flag == true)
-                        <p class="text-primary">Twitter投稿済み</p>
+                        <p class="text-primary"><i class="fab fa-twitter"></i>Twitter投稿済み</p>
                     @endif
                 </div>
                 <img src="{{ asset('storage/images/' . $post->image) }}" alt="Card image" height=70% width=70% class="mx-auto d-block">
                 <div class="card-body">
-                    <p class="card-subtitle text-secondary pb-1">by {{ $post->user->name }}</p>
+                    <p class="card-subtitle text-secondary pb-1">
+                        by <a href="{{ route('user.index', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>
+                    </p>
                     <p class="card-subtitle text-secondary">at {{ $post->created_at }}</p>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('post.index') }}" class="btn btn-success">一覧へ戻る</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-success">一覧へ戻る</a>
                 </div>
             </div>
         </div>
