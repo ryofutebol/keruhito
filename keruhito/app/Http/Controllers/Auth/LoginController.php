@@ -92,11 +92,4 @@ class LoginController extends Controller
         \Auth::login($user, true);
         return redirect(route('post.index'));
     }
-
-    public function showAvatar()
-    {
-        $user = Auth::user();
-        $avatar = Storage::disk('s3')->url('avatars/' . $user->avatar);
-        return view('layouts.app', compact('avatar'));
-    }
 }
