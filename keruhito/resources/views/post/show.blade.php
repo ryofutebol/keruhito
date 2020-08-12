@@ -35,7 +35,7 @@
                         <p class="text-primary"><i class="fab fa-twitter"></i>Twitter投稿済み</p>
                     @endif
                 </div>
-                <img src="{{ asset('storage/images/' . $post->image) }}" alt="Card image" height=70% width=70% class="mx-auto d-block">
+                <img src="{{ $show_post }}" alt="Card image" height=70% width=70% class="mx-auto d-block">
                 <div class="card-body">
                     <p class="card-subtitle text-secondary pb-1">
                         by <a href="{{ route('user.index', ['id' => $post->user_id]) }}">{{ $post->user->name }}</a>

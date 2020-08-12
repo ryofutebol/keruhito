@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -65,6 +66,7 @@ class LoginController extends Controller
             return redirect(route('auth.twitterLogin'));
         }
 
+        // dd($twitter_user);
         $url = $twitter_user->avatar_original;
         $file_name = substr(strrchr($url, '/'), 1);
         $img = file_get_contents($url);
@@ -84,9 +86,17 @@ class LoginController extends Controller
         if ($user->wasRecentlyCreated == true || $user->avatar != $file_name) {
             Storage::delete('public/avatars/' . $user->avatar);
             Storage::put('public/avatars/' . $file_name, $img);
+            Storage::disk('s3')->putFileAs('avatars/', new File($file_path), $file_name, 'public');
             $user->update(['avatar' => $file_name]);
         }
         \Auth::login($user, true);
         return redirect(route('post.index'));
+    }
+
+    public function showAvatar()
+    {
+        $user = Auth::user();
+        $avatar = Storage::disk('s3')->url('avatars/' . $user->avatar);
+        return view('layouts.app', compact('avatar'));
     }
 }

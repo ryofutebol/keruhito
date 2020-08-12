@@ -22,7 +22,8 @@ class UserController extends Controller
         $user = User::find($id);
         $posts = Post::where('user_id', $user->id)->latest()->paginate(10);
         $posts_count = $posts->total();
-        return view('user.index', compact('posts', 'user', 'posts_count'));
+        $avatar = Storage::disk('s3')->url('avatars/' . $user->avatar);
+        return view('user.index', compact('posts', 'user', 'posts_count', 'avatar'));
     }
 
     /**

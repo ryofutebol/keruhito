@@ -55,7 +55,7 @@ class PostController extends Controller
             $tweet_check = $twitter->post('statuses/update', array('status' => $tweet_content));
         }
         $post['image'] = $file_name;
-        $request->file('image')->storeAs('public/images/', $file_name);
+        Storage::disk('s3')->putFileAs('images/', $request->file('image'), $file_name, 'public');
         Post::create($post);
         return redirect()->route('post.index')->with('success', '投稿しました');
     }
@@ -69,7 +69,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('post.show', compact('post'));
+        $show_post = Storage::disk('s3')->url('images/' . $post->image);
+        return view('post.show', compact('post', 'show_post'));
     }
 
     /**
@@ -100,7 +101,7 @@ class PostController extends Controller
         if ($request->file('image')) {
             $file_name = mt_rand() . '.jpg';
             Storage::delete('public/images/' . $post->image);
-            $request->file('image')->storeAs('public/images/', $file_name);
+            Storage::disk('s3')->putFileAs('images/', $request->file('image'), $file_name, 'public');
         }
 		$post->fill(['title' => $request->title]);
 		$post->fill(['content' => $request->content]);

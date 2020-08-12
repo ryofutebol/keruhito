@@ -14,9 +14,9 @@
                 @endif
                 <div class="card-header d-flex">
                     @if ($user->avatar)
-                        <img src="{{ asset('storage/avatars/' . $user->avatar) }}" width="32" height="32">
+                        <img src="{{ $avatar }}" width="32" height="32">
                     @endif
-                    <h4 class="pt-1 text-secondary">{{ $user->name }}</h4>
+                    <h4 class="pt-1 pl-1 text-secondary">{{ $user->name }}</h4>
                 </div>
 
                 <!-- フラッシュメッセージの表示 -->
